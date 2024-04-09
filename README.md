@@ -9,7 +9,7 @@
 3. [Usage](#Usage)
 4. [Examples](#Examples)
 5. [Contribution](#Contribution)
-6. [Licence](#Licence)
+6. [License](#License)
 
 ## Installation
 ```
@@ -19,4 +19,5 @@ pip install sqlite-shift
 ## Usage
 ## Examples
 ## Contribution
-## Licence
+## License
+Licensed under the **Apache License 2.0**.
