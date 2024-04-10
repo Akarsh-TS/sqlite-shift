@@ -9,11 +9,11 @@
 3. [Basic Usage](#basic-usage)
 4. [Migration Structure](#migration-structure)
 5. [Migration Manager](#migration-manager)
-6. [Contribution](#Contribution)
-7. [License](#License)
+6. [Contribution](#contribution)
+7. [License](#license)
 
 ## Installation
-You can install SQLite-Shift via pip:
+You can install **sqlite-shift** via pip:
 ```
 pip install sqlite-shift
 ```
@@ -27,13 +27,13 @@ pip install sqlite-shift
 
 ### 1. Create a configuration file
 SQLite-Shift utilizes a configuration file to manage settings such as database connection details and migration paths. To create a configuration file:
-1. Create a new file named `migrations.ini` in your project directory.
-2. Add the following configuration options:
+1. Create a new `.ini` configuration file in your project directory, below is a sample configuration.
    ```
     [test_db] # Database name  
-    db_path = /path/to/database.db # Database path
-    migrations_path = /path/to/migrations # The directory path where migration files are to be stored for this database.
+    db_path = /path/to/test_db.sql # Database path
+    migrations_path = /path/to/schema_migrations # The directory path where migration files are to be stored for this database.
    ```
+   Refer to [Configuration Structure](#configuration-structure) on how to implement a migration file.
  3. Generate a Migration
     Use the create_migration command from the SQLite-Shift CLI
     ```
@@ -49,10 +49,41 @@ SQLite-Shift utilizes a configuration file to manage settings such as database c
     ```
     sqlite-shift revert test_db
     ```
-    
 
+## Configuration Structure
+The configuration file in `sqlite-shift` allows developers to configure one or more databases and their details. Below is the structure of the configuration file and its available options:
+```
+[<database name>]
+db_path = <path to the sqlite database>
+migrations_path = <path to the migrations folder that holds all the migration files >
+```
+Note:
+1. One or more databases can be configured and the same database name should be used while applying / reverting migrations.
+2. Migrations folder should be named as `schema_migrations`.
+
+### Examples
+
+1. Configuration with one database
+   
+   ```
+   [orders_db]
+   db_path = /src/db/orders.sql
+   migrations_path = /src/schema_migrations
+   ```
+3. Configuration with two database
+   
+   ```
+   [orders_db]
+   db_path = /src/db/orders.sql
+   migrations_path = /src/orders/schema_migrations
+
+   [users_db]
+   db_path = /src/db/users.sql
+   migrations_path = /src/users/schema_migrations
+   ```
 
 ## Migration Structure
+* Migrations folder should always be named `schema_migrations`.
 * To apply a migration, **sqlite-shift** uses the `upgrade` method defined in each migration file. When `apply_all_migrations` is called, S **sqlite-shift** iterates through all migration files in the specified directory and applies them in the correct order based on their dependencies.
 * To revert a migration, **sqlite-shift** uses the `downgrade` method defined in each migration file. When `revert_last_migration` is called,  **sqlite-shift** reverts the last applied migration by executing the downgrade method of the corresponding migration file.
 * All migrations will be executed within a **transaction**
@@ -99,5 +130,19 @@ manager.revert_last_migration() # Reverts the last applied migration from the da
 ```
 
 ## Contribution
+Thank you for considering contributing to SQLite-Shift! Here are some guidelines to get started:
+
+* Reporting Issues: If you encounter a bug or have a suggestion for improvement, please open an issue.
+
+* Code Contributions: Fork the repository, make your changes, and submit a pull request. Follow existing code style and add tests for new features or fixes.
+
+* Code Review: All pull requests undergo code review. Be open to feedback and suggestions from maintainers.
+
+* Testing: Ensure that your changes include appropriate tests to maintain code quality.
+
+* Documentation: Update documentation for any new features or modifications.
+
+Your contributions are appreciated! Thank you for helping improve **sqlite-shift**.
+
 ## License
 Licensed under the **Apache License 2.0**.
