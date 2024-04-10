@@ -27,7 +27,7 @@ pip install sqlite-shift
 
 ### 1. Create a configuration file
 SQLite-Shift utilizes a configuration file to manage settings such as database connection details and migration paths. To create a configuration file:
-1. Create a new file named migrations.ini in your project directory.
+1. Create a new file named `migrations.ini` in your project directory.
 2. Add the following configuration options:
    ```
     [test_db] # Database name  
@@ -89,7 +89,7 @@ manager = MigrationManager(db_name="example_db", config_file_path="migrations.in
 ```
 Accepts the following parameters on initialisation
 1. **db_name**: The database to be used
-2. **config_file_path**: The path for the configuration file. By default, it tries to find the config file in the project root directory.
+2. **config_file_path**: The path for the configuration file. By default, it tries to find the config file with the name `migrations.ini` in the project root directory.
 
 ### Methods
 
