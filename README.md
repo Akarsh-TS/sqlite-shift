@@ -4,19 +4,20 @@
 `sqlite-shift` is a streamlined framework for managing SQLite database migrations, inspired by Django's methodology, offering an intuitive approach to schema evolution.
 
 ## Table of Contents
-1. [Installation](#Installation)
-2. [Features](#Features)
-3. [Usage](#Usage)
-4. [Examples](#Examples)
-5. [Contribution](#Contribution)
-6. [License](#License)
+1. [Installation](#installation)
+2. [Features](#features)
+3. [Basic Usage](#basic-usage)
+4. [Migration Structure](#migration-structure)
+5. [Migration Manager](#migration-manager)
+6. [Contribution](#Contribution)
+7. [License](#License)
 
 ## Installation
 You can install SQLite-Shift via pip:
 ```
 pip install sqlite-shift
 ```
-## Features & Usage
+## Features
 * **Automatic Dependency Tracking**: Automatically track and manage migration dependencies based on the order of execution.
 * **Configuration Options**: Customize migration paths, database connections, and other settings via a configuration file.
 * **CLI Support**: Command-line interface for convenient migration management.
@@ -38,7 +39,7 @@ SQLite-Shift utilizes a configuration file to manage settings such as database c
     ```
     sqlite-shift create test_db --migration_name add_users_table
     ```
-    Refer to [Migration Structure](###MigrationStructure) on how to implement a migration file.
+    Refer to [Migration Structure](#migration-structure) on how to implement a migration file.
 
  5. Apply a Migration
     ```
@@ -52,8 +53,10 @@ SQLite-Shift utilizes a configuration file to manage settings such as database c
 
 
 ## Migration Structure
+* To apply a migration, **sqlite-shift** uses the `upgrade` method defined in each migration file. When `apply_all_migrations` is called, S **sqlite-shift** iterates through all migration files in the specified directory and applies them in the correct order based on their dependencies.
+* To revert a migration, **sqlite-shift** uses the `downgrade` method defined in each migration file. When `revert_last_migration` is called,  **sqlite-shift** reverts the last applied migration by executing the downgrade method of the corresponding migration file.
+* All migrations will be executed within a **transaction**
 
-hi
 ```
 from sqlite_shift.core.base_migration import BaseMigration
 
@@ -74,8 +77,27 @@ class Migration(BaseMigration):  # All migration classes should extend "BaseMigr
 
 ```
 
+## Migration Manager
+The Migration Manager class in **sqlite-shift** provides a set of methods to manage database migrations.
 
-## Examples
+### Initialisation
+```
+from sqlite_shift import MigrationManager
+
+# Initialize Migration Manager
+manager = MigrationManager(db_name="example_db", config_file_path="migrations.ini")
+```
+Accepts the following parameters on initialisation
+1. **db_name**: The database to be used
+2. **config_file_path**: The path for the configuration file. By default, it tries to find the config file in the project root directory.
+
+### Methods
+
+```
+manager.apply_all_migrations()  # Applies all unapplied migrations in the specified migrations directory to the database.
+manager.revert_last_migration() # Reverts the last applied migration from the database.
+```
+
 ## Contribution
 ## License
 Licensed under the **Apache License 2.0**.
