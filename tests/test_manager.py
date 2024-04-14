@@ -12,7 +12,7 @@ class TestMigrationManager:
         conn = sqlite3.connect(str(test_db_path))
         try:
             cursor = conn.cursor()
-            cursor.execute("SELECT version FROM schema_migrations ORDER BY id ASC;")
+            cursor.execute("SELECT version FROM schema_migrations_sqlite_shift ORDER BY id ASC;")
             versions = [row[0] for row in cursor.fetchall()]
             print("versions",versions)
             assert len(versions) == 2, "Two migrations should be applied."
@@ -22,7 +22,7 @@ class TestMigrationManager:
             migration_manager.revert_last_migration()
 
             # Check state after revert
-            cursor.execute("SELECT version FROM schema_migrations ORDER BY id ASC;")
+            cursor.execute("SELECT version FROM schema_migrations_sqlite_shift ORDER BY id ASC;")
             versions = [row[0] for row in cursor.fetchall()]
             assert len(versions) == 1, "Only one migration should remain after revert."
             assert versions == ["001_initial"], "Remaining migration should be the initial one."

@@ -6,6 +6,7 @@ from sqlite_shift.base_migration import BaseMigration
 
 class Migration(BaseMigration):
     db_name = "test_db"
+    previous_migration = "None"
 
     def upgrade(cls, conn: Connection):
         cursor = conn.cursor()
