@@ -1,6 +1,7 @@
 import argparse
 import os
-from core.manager import MigrationManager
+
+from sqlite_shift.manager import MigrationManager
 
 
 def main():

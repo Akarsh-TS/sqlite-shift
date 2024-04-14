@@ -5,14 +5,12 @@ import re
 import sqlite3
 import time
 
+ROOT_DIR = os.getcwd()
+
 
 class MigrationManager:
     def __init__(self, db_name, config_file_path=None):
-        if config_file_path is None:
-            self.config_file = os.path.join(os.getcwd(), "migrations.ini")
-        else:
-            self.config_file = os.path.join(os.getcwd(), config_file_path)
-
+        self.config_file = os.path.join(ROOT_DIR, config_file_path if config_file_path else "migrations.ini")
         self.db_name = db_name
         self._read_config()
         self._validate_paths()
@@ -34,8 +32,8 @@ class MigrationManager:
             )
 
         section = config[self.db_name]
-        self.db_path = section.get("DB_PATH")
-        self.migrations_path = section.get("DB_MIGRATIONS_PATH")
+        self.db_path = os.path.join(ROOT_DIR,section.get("DB_PATH"))
+        self.migrations_path = os.path.join(ROOT_DIR,section.get("DB_MIGRATIONS_PATH"))
 
     def _validate_paths(self):
         # Validate the database path
@@ -52,14 +50,14 @@ class MigrationManager:
 
         # Ensure the migrations directory is named 'schema_migrations'
         dir_name = os.path.basename(os.path.normpath(self.migrations_path))
+        
+        
         if dir_name != "schema_migrations":
             raise ValueError(
                 f"The migrations directory must be named 'schema_migrations', but was named '{dir_name}'."
             )
-
-        # Check if the migrations directory is a valid Python module
-        spec = importlib.util.find_spec("schema_migrations", self.migrations_path)
-        if spec is None:
+  
+        if os.path.exists(os.path.join(self.migrations_path, '__init__.py')) is False:
             raise ValueError(
                 f"The migrations directory '{self.migrations_path}' is not a valid Python module."
             )

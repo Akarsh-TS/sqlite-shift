@@ -1,5 +1,7 @@
 from sqlite3 import Connection
-from core.base_migration import BaseMigration
+
+from sqlite_shift.base_migration import BaseMigration
+
 
 
 class Migration(BaseMigration):

@@ -132,15 +132,29 @@ manager.revert_last_migration() # Reverts the last applied migration from the da
 ## Contribution
 Thank you for considering contributing to SQLite-Shift! Here are some guidelines to get started:
 
-* Reporting Issues: If you encounter a bug or have a suggestion for improvement, please open an issue.
+* **Reporting Issues**: 
 
-* Code Contributions: Fork the repository, make your changes, and submit a pull request. Follow existing code style and add tests for new features or fixes.
+    If you encounter a bug or have a suggestion for improvement, please open an issue.
 
-* Code Review: All pull requests undergo code review. Be open to feedback and suggestions from maintainers.
+* **Code Contributions**: 
 
-* Testing: Ensure that your changes include appropriate tests to maintain code quality.
+    Fork the repository, make your changes, and submit a pull request. Follow existing code style and add tests for new features or fixes.
 
-* Documentation: Update documentation for any new features or modifications.
+* **Code Review**: 
+
+    All pull requests undergo code review. Be open to feedback and suggestions from maintainers.
+
+* **Testing**: 
+    
+    Ensure that your changes include appropriate tests to maintain code quality.
+
+    ```
+    
+    ```
+
+* **Documentation**: 
+    
+    Update documentation for any new features or modifications.
 
 Your contributions are appreciated! Thank you for helping improve **sqlite-shift**.
 
