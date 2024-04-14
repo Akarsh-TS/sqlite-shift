@@ -1,7 +1,7 @@
 # sqlite-shift
 
 ## Description
-`sqlite-shift` is a streamlined framework for managing SQLite database migrations, inspired by Django's methodology, offering an intuitive approach to schema evolution.
+`sqlite-shift` is a streamlined framework for managing SQLite database migrations, inspired by Django's methodology.
 
 ## Table of Contents
 1. [Installation](#installation)

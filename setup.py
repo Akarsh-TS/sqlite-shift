@@ -2,8 +2,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="sqlite-shift",
-    version="0.1.0",
-    author="Your Name",
+    version="0.1.1",
+    author="Akarsh T S",
     author_email="ts.akarsh@gmail.com",
     description="A streamlined framework for managing SQLite database migrations, inspired by Django.",
     long_description=open("README.md").read(),

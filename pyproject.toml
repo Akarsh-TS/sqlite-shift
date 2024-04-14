@@ -1,0 +1,25 @@
+[project]
+name = "sqlite-shift"
+version = "0.0.2"
+authors = [
+  { name="Akarsh T S", email="ts.akarsh@gmail.com" },
+]
+description = "sqlite-shift is a streamlined framework for managing SQLite database migrations, inspired by Django's methodology."
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["sqlite migrations","sqlite migrate", "sqllite", "sql", "migrate", "migrations"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/Akarsh-TS/sqlite-shift"
+Issues = "https://github.com/Akarsh-TS/sqlite-shift/issues"
+
+
+[project.scripts]
+sqlite-shift = "sqlite_shift.cli:main"
